@@ -23,6 +23,10 @@ pipeline {
                 withSonarQubeEnv("${SONARQUBE_SERVER}") {
                     // Ejecutar el análisis con SonarScanner
                     sh '''
+                        echo "Current agent:" \
+                        hostname \
+                        echo "Current PATH:" \
+                        echo $PATH \
                         sonar-scanner \
                         -Dsonar.projectKey=Pipeline_SonarQube \
                         -Dsonar.sources=vulnerabilities \
