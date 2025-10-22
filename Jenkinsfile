@@ -24,7 +24,7 @@ pipeline {
                     // Ejecutar el análisis con SonarScanner
                     sh '''
                         sonar-scanner \
-                        -Dsonar.projectKey=Pipeline_SonarQube \
+                        -Dsonar.projectKey=Projecte2 \
                         -Dsonar.sources=vulnerabilities \
                         -Dsonar.host.url=${SONAR_HOST_URL} \
                         -Dsonar.login=${SONAR_AUTH_TOKEN} \
