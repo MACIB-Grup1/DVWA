@@ -29,7 +29,7 @@ pipeline {
                         -Dsonar.projectKey=Projecte2
                         -Dsonar.sources=.
                         -Dsonar.host.url=${env.SONAR_HOST_URL}
-                        -Dsonar.login=${sqa_d90d740085f9d4ba6b5f91e3455914479c00add4}
+                        -Dsonar.token=${sqa_d90d740085f9d4ba6b5f91e3455914479c00add4}
                     '''
                     //-Dsonar.login=${env.SONAR_AUTH_TOKEN}
                 }
