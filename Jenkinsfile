@@ -24,7 +24,7 @@ pipeline {
                 withSonarQubeEnv("${env.SONARQUBE_SERVER}") {
                     // Ejecutar el análisis con SonarScanner
                     sh '''
-                        printenv | grep SONAR_AUTH_TOKEN;
+                        printenv
                         sonar-scanner
                         -Dsonar.projectKey=Projecte2
                         -Dsonar.sources=.
