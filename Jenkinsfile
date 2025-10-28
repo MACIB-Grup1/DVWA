@@ -6,7 +6,7 @@ pipeline {
         SONARQUBE_SERVER = 'SonarQube'
         SONAR_HOST_URL = 'http://sonarqube:9000' // URL de tu servidor SonarQube
         //SONAR_AUTH_TOKEN = credentials('sonarqube-token') // ID de la credencial en Jenkins
-        SONAR_AUTH_TOKEN = 'squ_885052be68536f786d151bc63dbd01df53f83106'
+        SONAR_AUTH_TOKEN = 'sqa_d90d740085f9d4ba6b5f91e3455914479c00add4'
         // Agregar sonar-scanner al PATH
         PATH = "/opt/sonar-scanner/bin:${env.PATH}"
     }
@@ -29,7 +29,7 @@ pipeline {
                         -Dsonar.projectKey=Projecte2
                         -Dsonar.sources=.
                         -Dsonar.host.url=${env.SONAR_HOST_URL}
-                        -Dsonar.login=${squ_885052be68536f786d151bc63dbd01df53f83106}
+                        -Dsonar.login=${sqa_d90d740085f9d4ba6b5f91e3455914479c00add4}
                     '''
                     //-Dsonar.login=${env.SONAR_AUTH_TOKEN}
                 }
