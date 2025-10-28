@@ -24,6 +24,9 @@ pipeline {
                 withSonarQubeEnv("${env.SONARQUBE_SERVER}") {
                     // Ejecutar el análisis con SonarScanner
                     sh '''
+                        echo "Token de SonarQube: ${env.SONAR_AUTH_TOKEN}"
+
+                        
                         sonar-scanner
                         -Dsonar.projectKey=Projecte2
                         -Dsonar.sources=.
