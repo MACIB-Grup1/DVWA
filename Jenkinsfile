@@ -26,11 +26,12 @@ pipeline {
                     sh '''
                         printenv
                         sonar-scanner
-                        -Dsonar.projectKey=Projecte2
+                        -Dsonar.projectKey=PipelineScan
                         -Dsonar.sources=.
                         -Dsonar.host.url=${env.SONAR_HOST_URL}
-                        -Dsonar.token=${sqa_d90d740085f9d4ba6b5f91e3455914479c00add4}
+                        -Dsonar.token=${env.SONAR_AUTH_TOKEN}
                     '''
+                    //-Dsonar.token=${sqa_d90d740085f9d4ba6b5f91e3455914479c00add4}
                     //-Dsonar.login=${env.SONAR_AUTH_TOKEN}
                 }
             }
