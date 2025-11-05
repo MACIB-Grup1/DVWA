@@ -14,11 +14,6 @@ pipeline {
     
 
     stages {
-        stage('Fix Git TLS') {
-            steps {
-                sh 'git config --global http.sslVerify false' // Deshabilita la verificación SSL
-            }
-        }
         stage('Checkout') {
             steps {
                 // Clonar el código fuente desde el repositorio
