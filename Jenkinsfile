@@ -22,22 +22,40 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                // Configurar el entorno de SonarQube
-                withSonarQubeEnv("${env.SONARQUBE_SERVER}") {
-                    // Ejecutar el análisis con SonarScanner
-                    sh '''
-                        printenv
-                        sonar-scanner
-                        -Dsonar.projectKey=PipelineScan
-                        -Dsonar.sources=.
-                        -Dsonar.host.url=${env.SONAR_HOST_URL}
-                        -Dsonar.token=${env.SONAR_AUTH_TOKEN}
-                    '''
-                    //-Dsonar.token=${sqa_d90d740085f9d4ba6b5f91e3455914479c00add4}
-                    //-Dsonar.login=${env.SONAR_AUTH_TOKEN}
+                script {
+                    // Usar el SonarQube configurado en Jenkins
+                    withSonarQubeEnv("${env.SONARQUBE_SERVER}") {
+                        // Cargar el escáner configurado globalmente
+                        def scannerHome = tool 'SonarQubeScanner'
+                        sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                                -Dsonar.projectKey=PipelineScan \
+                                -Dsonar.sources=. \
+                                -Dsonar.host.url=${SONAR_HOST_URL} \
+                                -Dsonar.token=${SONAR_AUTH_TOKEN}
+                        """
+                    }
                 }
             }
         }
+        //stage('SonarQube Analysis') {
+          //  steps {
+                // Configurar el entorno de SonarQube
+            //    withSonarQubeEnv("${env.SONARQUBE_SERVER}") {
+                    // Ejecutar el análisis con SonarScanner
+              //      sh '''
+                //        printenv
+                  //      sonar-scanner
+                    //    -Dsonar.projectKey=PipelineScan
+                      //  -Dsonar.sources=.
+                        //-Dsonar.host.url=${env.SONAR_HOST_URL}
+                        //-Dsonar.token=${env.SONAR_AUTH_TOKEN}
+                    //'''
+                    //-Dsonar.token=${sqa_d90d740085f9d4ba6b5f91e3455914479c00add4}
+                    //-Dsonar.login=${env.SONAR_AUTH_TOKEN}
+                //}
+            //}
+        //}
         stage('Quality Gate') {
             steps {
                 // Esperar el resultado del Quality Gate
