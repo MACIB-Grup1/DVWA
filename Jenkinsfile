@@ -14,6 +14,9 @@ pipeline {
     
 
     stages {
+        stage('Fix Git TLS') {
+            sh 'git config --global http.sslbackend gnutls'
+        }
         stage('Checkout') {
             steps {
                 // Clonar el código fuente desde el repositorio
