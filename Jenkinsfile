@@ -16,10 +16,7 @@ pipeline {
     stages {
         stage('Fix Git TLS') {
             steps {
-                sh 'git config --global http.sslbackend "openssl"'
-                // O como alternativa (menos seguro pero a veces funciona):
-                // sh 'git config --global http.sslverify false' 
-                // Solo para debug; NO recomendado en producción
+                sh 'git config --global http.sslVerify false' // Deshabilita la verificación SSL
             }
         }
         stage('Checkout') {
