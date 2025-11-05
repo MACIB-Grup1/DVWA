@@ -11,7 +11,17 @@ pipeline {
         // PATH = "/opt/sonar-scanner/bin:${env.PATH}"
     }
 
+    
+
     stages {
+        stage('Fix Git TLS') {
+            steps {
+                sh 'git config --global http.sslbackend "openssl"'
+                // O como alternativa (menos seguro pero a veces funciona):
+                // sh 'git config --global http.sslverify false' 
+                // Solo para debug; NO recomendado en producción
+            }
+        }
         stage('Checkout') {
             steps {
                 // Clonar el código fuente desde el repositorio
