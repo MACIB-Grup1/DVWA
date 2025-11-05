@@ -26,14 +26,16 @@ pipeline {
                     // Usar el SonarQube configurado en Jenkins
                     withSonarQubeEnv("${env.SONARQUBE_SERVER}") {
                         // Cargar el escáner configurado globalmente
-                        def scannerHome = tool 'SonarQubeScanner'
-                        sh """
-                            ${scannerHome}/bin/sonar-scanner \
-                                -Dsonar.projectKey=PipelineScan \
-                                -Dsonar.sources=. \
-                                -Dsonar.host.url=${SONAR_HOST_URL} \
-                                -Dsonar.token=${SONAR_AUTH_TOKEN}
-                        """
+                        withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_AUTH_TOKEN')]) {
+                            def scannerHome = tool 'SonarQubeScanner'
+                            sh """
+                                ${scannerHome}/bin/sonar-scanner \
+                                    -Dsonar.projectKey=PipelineScan \
+                                    -Dsonar.sources=. \
+                                    -Dsonar.host.url=${SONAR_HOST_URL} \
+                                    -Dsonar.token=${SONAR_AUTH_TOKEN}
+                            """
+                        }
                     }
                 }
             }
